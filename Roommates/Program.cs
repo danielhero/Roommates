@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Roommates.Models;
 using Roommates.Repositories;
 
@@ -20,23 +21,53 @@ namespace Roommates
             Console.WriteLine("Getting All Rooms:");
             Console.WriteLine();
 
-            List<Room> allRooms = roomRepo.GetAll();
+            List<Room> allRoom = roomRepo.GetAll();
 
-            foreach (Room room in allRooms)
+            foreach (Room room in allRoom)
             {
                 Console.WriteLine($"{room.Id} {room.Name} {room.MaxOccupancy}");
             }
 
-            Room bathroom = new Room
+            Console.WriteLine();
+
+
+            RoommateRepository roommateRepo = new RoommateRepository(CONNECTION_STRING);
+
+            Console.WriteLine("Getting All Roommates:");
+            Console.WriteLine();
+
+            List<Roommate> allRoommates = roommateRepo.GetAll();
+
+            foreach (Roommate roommate in allRoommates)
             {
-                Name = "Bathroom",
-                MaxOccupancy = 1
-            };
+                Console.WriteLine($"{roommate.Id} {roommate.FirstName} {roommate.LastName} {roommate.RentPortion} {roommate.MovedInDate}");
+            }
 
-            roomRepo.Insert(bathroom);
+            Console.WriteLine();
 
-            Console.WriteLine("-------------------------------");
-            Console.WriteLine($"Added the new Room with id {bathroom.Id}");
+
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Getting Roommate with Id 2");
+
+            Roommate singleRoommate = roommateRepo.GetById(2);
+
+            Console.WriteLine($"{singleRoommate.Id} {singleRoommate.FirstName} {singleRoommate.LastName}");
+
+
+            Console.WriteLine("----------------------------");
+
+            List<Roommate> roommatesInRoom = roommateRepo.GetAllWithRoom(1);
+
+            foreach(Roommate roommate in roommatesInRoom)
+            {
+                Console.WriteLine($"{roommate.FirstName} {roommate.LastName} {roommate.Room.Name}");
+            }
+
+
+
+
+
+
 
         }
     }
