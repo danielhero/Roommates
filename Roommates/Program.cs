@@ -70,11 +70,14 @@ namespace Roommates
                 Console.WriteLine($"{roommate.FirstName} {roommate.LastName} {roommate.Room.Name}");
             }
 
+            Console.WriteLine();
+
+
             Console.WriteLine("----------------------------");
             Console.WriteLine("Adding new roommate:");
             Console.WriteLine();
 
-            List<Room> someRooms = roomRepo.GetAll();
+            /*List<Room> someRooms = roomRepo.GetAll();
             Room aRoom = someRooms.Last();
 
             Roommate roommate4 = new Roommate()
@@ -88,7 +91,14 @@ namespace Roommates
 
             roommateRepo.Insert(roommate4);
             
-            Console.WriteLine($"Added {roommate4.FirstName} as a new roommate with id {roommate4.Id}");
+            Console.WriteLine($"Added {roommate4.FirstName} as a new roommate with id {roommate4.Id}");*/
+
+
+            Console.WriteLine();
+
+            Console.WriteLine("----------------------------");
+            Console.WriteLine("Updating roommate:");
+            Console.WriteLine();
 
 
 
