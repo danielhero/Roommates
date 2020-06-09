@@ -106,8 +106,8 @@ namespace Roommates.Repositories
                                         room.Name 
                                         FROM Roommate roommate 
                                         JOIN Room room ON roommate.RoomId = room.Id 
-                                        WHERE roommate.roomId = {roomId}";
-                    
+                                        WHERE roommate.roomId = @roomId";
+                    cmd.Parameters.AddWithValue("roomId", roomId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     List<Roommate> roommateRoom = new List<Roommate>();
