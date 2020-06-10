@@ -156,5 +156,30 @@ namespace Roommates.Repositories
                 }
             }
         }
+
+        public void Update(Roommate roommate)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE Roommate
+                                    SET FirstName = @FirstName,
+                                        LastName = @LastName,
+                                        RentPortion = @RentPortion,
+                                        MoveInDate = @MoveInDate,
+                                        RoomId = @RoomId
+                                    WHERE Id = @Id";
+                    cmd.Parameters.AddWithValue("@FirstName", roommate.FirstName);
+                    cmd.Parameters.AddWithValue("@LastName", roommate.LastName);
+                    cmd.Parameters.AddWithValue("@RentPortion", roommate.RentPortion);
+                    cmd.Parameters.AddWithValue("@MoveInDate", roommate.MovedInDate);
+                    cmd.Parameters.AddWithValue("@RoomId", roommate.Room.Id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
